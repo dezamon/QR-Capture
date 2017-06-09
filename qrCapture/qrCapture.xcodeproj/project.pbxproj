@@ -16,6 +16,7 @@
 		3BB5FD131EE40D2F008CA08F /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FD121EE40D2F008CA08F /* Constraint.swift */; };
 		3BB5FD161EE40D7C008CA08F /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FD151EE40D7C008CA08F /* Params.swift */; };
 		3BB5FD181EE411AB008CA08F /* LikeSoundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FD171EE411AB008CA08F /* LikeSoundListViewController.swift */; };
+		C2A4F3AE9CE3FE8D5400B2B8 /* Pods_qrCapture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C12B2629D0E323308DDBD5 /* Pods_qrCapture.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,9 @@
 		3BB5FD121EE40D2F008CA08F /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		3BB5FD151EE40D7C008CA08F /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
 		3BB5FD171EE411AB008CA08F /* LikeSoundListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeSoundListViewController.swift; sourceTree = "<group>"; };
+		5368FB3F3006D5DA0CE9A692 /* Pods-qrCapture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qrCapture.release.xcconfig"; path = "Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture.release.xcconfig"; sourceTree = "<group>"; };
+		79CE7EAB1393FB182C9D5922 /* Pods-qrCapture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qrCapture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture.debug.xcconfig"; sourceTree = "<group>"; };
+		98C12B2629D0E323308DDBD5 /* Pods_qrCapture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qrCapture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2A4F3AE9CE3FE8D5400B2B8 /* Pods_qrCapture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1F1AB19A36228919A3AB54 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79CE7EAB1393FB182C9D5922 /* Pods-qrCapture.debug.xcconfig */,
+				5368FB3F3006D5DA0CE9A692 /* Pods-qrCapture.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3BB5FCEE1EE409ED008CA08F = {
 			isa = PBXGroup;
 			children = (
 				3BB5FCF91EE409ED008CA08F /* qrCapture */,
 				3BB5FCF81EE409ED008CA08F /* Products */,
+				2F1F1AB19A36228919A3AB54 /* Pods */,
+				516F333E1D3613AF26587C72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +116,14 @@
 			name = Parameters;
 			sourceTree = "<group>";
 		};
+		516F333E1D3613AF26587C72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98C12B2629D0E323308DDBD5 /* Pods_qrCapture.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,9 +131,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BB5FD091EE409ED008CA08F /* Build configuration list for PBXNativeTarget "qrCapture" */;
 			buildPhases = (
+				6CBFBA06C8AC60C6D7E9E5D9 /* [CP] Check Pods Manifest.lock */,
 				3BB5FCF31EE409ED008CA08F /* Sources */,
 				3BB5FCF41EE409ED008CA08F /* Frameworks */,
 				3BB5FCF51EE409ED008CA08F /* Resources */,
+				282A624E41309212A5ACA6CD /* [CP] Embed Pods Frameworks */,
+				0FFD0081468B071DCE60FE07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,6 +194,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FFD0081468B071DCE60FE07 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		282A624E41309212A5ACA6CD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CBFBA06C8AC60C6D7E9E5D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3BB5FCF31EE409ED008CA08F /* Sources */ = {
@@ -299,6 +374,7 @@
 		};
 		3BB5FD0A1EE409ED008CA08F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79CE7EAB1393FB182C9D5922 /* Pods-qrCapture.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3R57U2AL9J;
@@ -306,12 +382,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = us.taka.qrCapture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		3BB5FD0B1EE409ED008CA08F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5368FB3F3006D5DA0CE9A692 /* Pods-qrCapture.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3R57U2AL9J;
@@ -319,6 +397,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = us.taka.qrCapture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -342,6 +421,7 @@
 				3BB5FD0B1EE409ED008CA08F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
