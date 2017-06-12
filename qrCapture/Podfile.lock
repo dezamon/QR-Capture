@@ -1,12 +1,17 @@
 PODS:
-  - Download-Font-iOS (1.0.0)
+  - Realm (2.8.0):
+    - Realm/Headers (= 2.8.0)
+  - Realm/Headers (2.8.0)
+  - RealmSwift (2.8.0):
+    - Realm (= 2.8.0)
 
 DEPENDENCIES:
-  - Download-Font-iOS
+  - RealmSwift
 
 SPEC CHECKSUMS:
-  Download-Font-iOS: dd03455f94fc9c59447e666ece6ae4776ef6e797
+  Realm: 929243ad2b618b3232e70658bedc61110e7563f1
+  RealmSwift: 5b7079b891f2833d1849294161ba3e092bbda3f6
 
-PODFILE CHECKSUM: 5dcf426acbddbc572b6abc7c6ac18d29c0f88a19
+PODFILE CHECKSUM: f86002cb23384332da2aab6e020ecd85034b91fe
 
 COCOAPODS: 1.0.1

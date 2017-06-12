@@ -6,5 +6,5 @@ target 'qrCapture' do
   use_frameworks!
 
   # Pods for qrCapture
-  pod 'Download-Font-iOS'
+  pod 'RealmSwift'
 end

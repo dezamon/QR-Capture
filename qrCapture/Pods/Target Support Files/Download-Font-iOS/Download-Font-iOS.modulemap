@@ -1,6 +1,0 @@
-framework module Download_Font_iOS {
-  umbrella header "Download-Font-iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

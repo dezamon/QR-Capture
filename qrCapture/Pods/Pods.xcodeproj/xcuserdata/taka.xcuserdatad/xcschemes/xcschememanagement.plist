@@ -4,12 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Download-Font-iOS.xcscheme</key>
+		<key>Pods-qrCapture.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-qrCapture.xcscheme</key>
+		<key>Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RealmSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>03E9F5F42453D6B3BD7E452F2C8F3EF5</key>
+		<key>57754F16ED7D429FE84901A1CD24BD74</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1D31F8E4B6E2878607513F78A45473C4</key>
+		<key>5F3DC0BF67A764762C9DE56415E5574C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8EBAA8AEE4B3F8EA826FE95726F9CD8C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
