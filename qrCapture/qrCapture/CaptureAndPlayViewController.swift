@@ -14,8 +14,11 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
     let captureView:UIView = UIView()
     let captureSession:AVCaptureSession = AVCaptureSession()
     let controllerPanelView:UIView = UIView()
+    let playerSlider:UISlider = UISlider()
+    let subLabel:UILabel = UILabel()
     let qrCodeView:UIView = UIView()
 
+    
     var videoLayer: AVCaptureVideoPreviewLayer?
 
     override func viewDidLoad() {
@@ -41,6 +44,12 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
         
         // トラックのタイトルを表示するラベル等を作成
         createTrackTitleLabels()
+        
+        // 再生用のスライダーを作成
+        createPlayerSlider()
+        
+        // 再生、ループなどのボタンを作成
+        createControllButtons()
     }
 
     override func didReceiveMemoryWarning() {
@@ -158,7 +167,6 @@ extension CaptureAndPlayViewController {
         
         
         // サブラベルの作成
-        let subLabel:UILabel = UILabel()
         subLabel.font = UIFont(name: fontHirakakuN3, size: fontSizeM)
         subLabel.textColor = colorGrayDark3
         subLabel.text = "チャプター1 おはようございます"
@@ -168,6 +176,129 @@ extension CaptureAndPlayViewController {
         self.controllerPanelView.addSubview(subLabel)
         _ = commonMarginConstraint(item1: subLabel, item2: self.controllerPanelView, applyItem: self.controllerPanelView, attribute1: .centerX, attribute2: .centerX, constant: 0)
         _ = commonMarginConstraint(item1: subLabel, item2: trackTitleLabel, applyItem: self.controllerPanelView, attribute1: .top, attribute2: .bottom, constant: subLabelVmargin)
+    }
+    
+    /**
+     * createPlayerSlider()は再生用のスライダーを作ります
+     *
+     */
+    func createPlayerSlider() {
+        
+        // スライダー用のプロパティ
+        let sliderWidth:CGFloat = self.controllerPanelView.bounds.width
+        let sliderHeight:CGFloat = 30
+        let sliderVmargin:CGFloat = 40
+                
+        // スライダーを初期化
+        playerSlider.minimumValue = 0.0
+        playerSlider.maximumValue = 1.0
+        playerSlider.value = 0.5
+        
+        // スライダーのつまみ部分を変更
+        let thumbImage:UIImage = UIImage(named: "slider-thumb")!
+        let minBaseImage:UIImage = UIImage(named: "slider-left")!
+        let maxBaseImage:UIImage = UIImage(named: "slider-right")!
+        let imageForMin = minBaseImage.stretchableImage(withLeftCapWidth: 4, topCapHeight: 0)
+        let imageForMax = maxBaseImage.stretchableImage(withLeftCapWidth: 4, topCapHeight: 0)
+
+        // カスタマイズ用の画像を当てはめる
+        playerSlider.setThumbImage(thumbImage, for: .normal)
+        playerSlider.setThumbImage(thumbImage, for: .highlighted)
+        playerSlider.setMinimumTrackImage(imageForMin, for: .normal)
+        playerSlider.setMaximumTrackImage(imageForMax, for: .normal)
+        
+        _ = customSizeConstraint.view.defineSize(item: playerSlider, width: sliderWidth, height: sliderHeight)
+        
+        self.controllerPanelView.addSubview(playerSlider)
+        _ = commonMarginConstraint(item1: playerSlider, item2: self.controllerPanelView, applyItem: self.controllerPanelView, attribute1: .centerX, attribute2: .centerX, constant: 0)
+        _ = commonMarginConstraint(item1: playerSlider, item2: self.subLabel, applyItem: self.controllerPanelView, attribute1: .top, attribute2: .bottom, constant: sliderVmargin)
+    }
+    
+    /**
+     * createControllButtons()は再生やスキップ、繰り返しなどのボタンを作成します
+     *
+     */
+    func createControllButtons(){
+        
+        //　ボタンに必要なプロパティ
+        let buttonSize1:CGFloat = 70
+        let buttonSize2:CGFloat = 55
+        let buttonSize3:CGFloat = 50
+        let buttonVmargin1:CGFloat = 30
+        let buttonHmargin:CGFloat = 10
+        
+        //
+        // 再生ボタンを作成
+        //
+        let playImage:UIImage = UIImage(named: "play")!
+        let playButton:UIButton = UIButton()
+        playButton.setImage(playImage, for: .normal)
+        playButton.imageView?.contentMode = .scaleAspectFit
+        
+        _ = customSizeConstraint.button.defineSize(item: playButton, width: buttonSize1, height: buttonSize1)
+        
+        self.controllerPanelView.addSubview(playButton)
+        _ = commonMarginConstraint(item1: playButton, item2: self.playerSlider, applyItem: self.controllerPanelView, attribute1: .left, attribute2: .left, constant: 0)
+        _ = commonMarginConstraint(item1: playButton, item2: self.playerSlider, applyItem: self.controllerPanelView, attribute1: .top, attribute2: .bottom, constant: buttonVmargin1)
+        
+        
+        //
+        // 前へ戻るボタンを作成
+        //
+        let skipPrevImage:UIImage = UIImage(named: "skip-prev")!
+        let skipPrevButton:UIButton = UIButton()
+        skipPrevButton.setImage(skipPrevImage, for: .normal)
+        skipPrevButton.imageView?.contentMode = .scaleAspectFit
+        
+        _ = customSizeConstraint.button.defineSize(item: skipPrevButton, width: buttonSize2, height: buttonSize2)
+        
+        self.controllerPanelView.addSubview(skipPrevButton)
+        _ = commonMarginConstraint(item1: skipPrevButton, item2: playButton, applyItem: self.controllerPanelView, attribute1: .left, attribute2: .right, constant: buttonHmargin)
+        _ = commonMarginConstraint(item1: skipPrevButton, item2: playButton, applyItem: self.controllerPanelView, attribute1: .centerY, attribute2: .centerY, constant: 0)
+        
+        
+        //
+        //　次へ進むボタンを作成
+        //
+        let skipNextImage:UIImage = UIImage(named: "skip-next")!
+        let skipNextButton:UIButton = UIButton()
+        skipNextButton.setImage(skipNextImage, for: .normal)
+        skipNextButton.imageView?.contentMode = .scaleAspectFit
+        
+        _ = customSizeConstraint.button.defineSize(item: skipNextButton, width: buttonSize2, height: buttonSize2)
+        
+        self.controllerPanelView.addSubview(skipNextButton)
+        _ = commonMarginConstraint(item1: skipNextButton, item2: skipPrevButton, applyItem: self.controllerPanelView, attribute1: .left, attribute2: .right, constant: buttonHmargin)
+        _ = commonMarginConstraint(item1: skipNextButton, item2: skipPrevButton, applyItem: self.controllerPanelView, attribute1: .centerY, attribute2: .centerY, constant: 0)
+        
+        
+        //
+        //　ループボタンを作成
+        //
+        let loopImage:UIImage = UIImage(named: "loop-off")!
+        let loopButton:UIButton = UIButton()
+        loopButton.setImage(loopImage, for: .normal)
+        loopButton.imageView?.contentMode = .scaleAspectFit
+        
+        _ = customSizeConstraint.button.defineSize(item: loopButton, width: buttonSize3, height: buttonSize3)
+        self.controllerPanelView.addSubview(loopButton)
+        _ = commonMarginConstraint(item1: loopButton, item2: skipNextButton, applyItem: self.controllerPanelView, attribute1: .left, attribute2: .right, constant: buttonHmargin)
+        _ = commonMarginConstraint(item1: loopButton, item2: skipNextButton, applyItem: self.controllerPanelView, attribute1: .centerY, attribute2: .centerY, constant: 0)
+        
+        
+        //
+        // LIKEボタンを作成
+        //
+        
+        let likeImage:UIImage = UIImage(named: "like-gray-off")!
+        let likeButton:UIButton = UIButton()
+        likeButton.setImage(likeImage, for: .normal)
+        likeButton.imageView?.contentMode = .scaleAspectFit
+        
+        _ = customSizeConstraint.button.defineSize(item: likeButton, width: buttonSize3, height: buttonSize3)
+        self.controllerPanelView.addSubview(likeButton)
+        _ = commonMarginConstraint(item1: likeButton, item2: loopButton, applyItem: self.controllerPanelView, attribute1: .left, attribute2: .right, constant: buttonHmargin)
+        _ = commonMarginConstraint(item1: likeButton, item2: loopButton, applyItem: self.controllerPanelView, attribute1: .centerY, attribute2: .centerY, constant: 0)
     }
 }
 
