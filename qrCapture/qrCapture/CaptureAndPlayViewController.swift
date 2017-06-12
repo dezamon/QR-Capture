@@ -9,16 +9,23 @@
 import UIKit
 import AVFoundation
 
-class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+import AVFoundation
+import MediaPlayer
+
+class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVAudioPlayerDelegate {
 
     let captureView:UIView = UIView()
     let captureSession:AVCaptureSession = AVCaptureSession()
     let controllerPanelView:UIView = UIView()
     let playerSlider:UISlider = UISlider()
+    let playButton:UIButton = UIButton()
     let subLabel:UILabel = UILabel()
     let qrCodeView:UIView = UIView()
 
-    
+    var audioPlayer: AVAudioPlayer!
+    var isSliderTapping:Bool = false
+    var isLooping:Bool = false
+    var timer:Timer = Timer()
     var videoLayer: AVCaptureVideoPreviewLayer?
 
     override func viewDidLoad() {
@@ -50,6 +57,11 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
         
         // 再生、ループなどのボタンを作成
         createControllButtons()
+        
+        // AudioPlayerを初期化します
+        initAudioPlayer()
+        
+        getAudioResouce()
     }
 
     override func didReceiveMemoryWarning() {
@@ -207,11 +219,18 @@ extension CaptureAndPlayViewController {
         playerSlider.setMinimumTrackImage(imageForMin, for: .normal)
         playerSlider.setMaximumTrackImage(imageForMax, for: .normal)
         
+        //　アクションを追加する
+        playerSlider.addTarget(self, action: #selector(self.sliderValueChanged(slider:)), for: .valueChanged)
+        playerSlider.addTarget(self, action: #selector(self.sliderTouchUpInside(slider:)), for: .touchUpInside)
+        playerSlider.addTarget(self, action: #selector(self.sliderTouchDown(slider:)), for: .touchDown)
+        
         _ = customSizeConstraint.view.defineSize(item: playerSlider, width: sliderWidth, height: sliderHeight)
         
         self.controllerPanelView.addSubview(playerSlider)
         _ = commonMarginConstraint(item1: playerSlider, item2: self.controllerPanelView, applyItem: self.controllerPanelView, attribute1: .centerX, attribute2: .centerX, constant: 0)
         _ = commonMarginConstraint(item1: playerSlider, item2: self.subLabel, applyItem: self.controllerPanelView, attribute1: .top, attribute2: .bottom, constant: sliderVmargin)
+        
+        
     }
     
     /**
@@ -231,9 +250,14 @@ extension CaptureAndPlayViewController {
         // 再生ボタンを作成
         //
         let playImage:UIImage = UIImage(named: "play")!
-        let playButton:UIButton = UIButton()
         playButton.setImage(playImage, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
+        
+        // ボタンにタグを設定 0:Stoping 1:Playing
+        playButton.tag = 0
+        
+        // アクションを追加
+        playButton.addTarget(self, action: #selector(self.playButtonIsTapped(sender:)), for: .touchUpInside)
         
         _ = customSizeConstraint.button.defineSize(item: playButton, width: buttonSize1, height: buttonSize1)
         
@@ -279,6 +303,12 @@ extension CaptureAndPlayViewController {
         let loopButton:UIButton = UIButton()
         loopButton.setImage(loopImage, for: .normal)
         loopButton.imageView?.contentMode = .scaleAspectFit
+        
+        //　アクションを追加
+        loopButton.addTarget(self, action: #selector(self.loopButtonIsTapped(sender:)), for: .touchUpInside)
+        
+        // タグを設定 0:ループしない 1:ループする
+        loopButton.tag = 0
         
         _ = customSizeConstraint.button.defineSize(item: loopButton, width: buttonSize3, height: buttonSize3)
         self.controllerPanelView.addSubview(loopButton)
@@ -370,10 +400,226 @@ extension CaptureAndPlayViewController {
         }
         */
     }
+    
+    
+    /**
+     * initAudioPlayer()はaudioPlayerを初期化します
+     *
+     */
+    func initAudioPlayer() {
+        
+        let session = AVAudioSession.sharedInstance()
+    
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .allowBluetooth)
+        } catch {
+            fatalError("failed to set category")
+        }
+        
+        // セッションを有効にする
+        do {
+            try session.setActive(true)
+        } catch {
+            fatalError("failed to activate a session")
+        }
+    }
+    
+    /**
+     * recognizeCurrentAudioRoute()は現在のオーディオリソースを取得します
+     *
+     */
+    func recognizeCurrentAudioRoute() -> String {
+        
+        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+        
+        var type:String = ""
+        
+        for description in currentRoute.outputs {
+            if description.portType == AVAudioSessionPortHeadphones {
+                print("headphone plugged in")
+                type = "earphone"
+            } else if description.portType == AVAudioSessionPortBluetoothHFP {
+                print("connected to bluetooh")
+                type = "bluetooh"
+            } else {
+                print("headphone pulled out")
+                type = "speaker"
+            }
+        }
+        return type
+    }
+    
+    /**
+     * findVoiceSound()はファイル名から音源を探します
+     *
+     *  parameter - fileName: 音声ファイルの名前です
+     */
+    func findVoiceSound(fileName:String) {
+        
+        // 音声ファイルを探す
+        let voiceSoundURL:URL =  URL(fileURLWithPath: Bundle.main.path(forResource: fileName, ofType: "mp3")!)
+        
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOf: voiceSoundURL)
+            self.audioPlayer.prepareToPlay()
+        } catch {
+            print("can not play sound")
+        }
+    }
+
+    /**
+     * startTimer()再生用のスライダーをアニメーションさせるためのタイマーです
+     *
+     */
+    func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.movePlayerSlider), userInfo: nil, repeats: true)
+    }
+    
+    
+    /**
+     * movePlayerSlider()は再生に応じて、スライダーを動かします
+     *
+     */
+    func movePlayerSlider(){
+        if let ap = self.audioPlayer {
+            // スライダーの値を更新する
+            self.playerSlider.value = Float(ap.currentTime)
+        }
+    }
+}
+
+
+// MARK: - ACTIONS
+extension CaptureAndPlayViewController {
+    
+    /**
+     * playButtonIsTapped()は再生ボタンがタップされた時に反応します
+     *
+     *  parameter - sender: 再生ボタンそのもの
+     */
+    func playButtonIsTapped(sender:UIButton){
+        
+        // タグに応じてアイコンを変える
+        if sender.tag == 0 {
+            
+            // 一時停止アイコンに変える
+            let resumeImage:UIImage = UIImage(named: "resume")!
+            sender.setImage(resumeImage, for: .normal)
+            
+            //　タグを設定
+            sender.tag = 1
+            
+            //　音源を再生する
+            self.audioPlayer.play()
+            
+            // 音源の長さに応じて、スライダーを調整する
+            self.playerSlider.maximumValue = Float(self.audioPlayer.duration)
+            
+            //　タイマーを開始
+            startTimer()
+            
+        } else {
+            // 再生アイコンに変える
+            let playImage:UIImage = UIImage(named: "play")!
+            sender.setImage(playImage, for: .normal)
+        
+            // タグを設定
+            sender.tag = 0
+            
+            // タイマーを停止
+            timer.invalidate()
+            
+            // 音声を一時停止する
+            audioPlayer.pause()
+        }
+    }
+    
+    /**
+     * sliderValueChanged()は再生用のスライダーの値が変更したときに反応します
+     *
+     *  parameter - slider: 再生用のUISlider
+     */
+    func sliderValueChanged(slider:UISlider) {
+        print("change")
+        
+        // スライダーがタップされている間だけ、値を変更する
+        if isSliderTapping {
+            self.timer.invalidate()
+        }
+    }
+    
+    /**
+     * sliderTouchDown()は再生用のスライダーボタンがタップされている時に反応します
+     *
+     *  parameter - slider: 再生用のUISlider
+     */
+    func sliderTouchDown(slider:UISlider) {
+        print("slider is tapping now")
+        isSliderTapping = true
+    }
+    
+    /**
+     * sliderTouchUpInside()は再生用のスライダーボタンがタップされて
+     * 再度指がボタンから離れたときに反応します
+     *
+     *  parameter - slider: 再生用のUISlider
+     */
+    func sliderTouchUpInside(slider:UISlider) {
+        
+        // 今のスライダーの位置をAudioPlayerに渡して再生箇所を変更します
+        self.audioPlayer.currentTime = TimeInterval(slider.value)
+    
+        isSliderTapping = false
+        
+        //　状況に応じてタイマーを動作させる
+        if audioPlayer.isPlaying {
+            startTimer()
+        } else {
+            self.timer.invalidate()
+        }
+    }
+    
+    /**
+     * loopButtonIsTapped()はループボタンがタップされたときに反応
+     *
+     *  parameter - sender: ループボタン
+     */
+    func loopButtonIsTapped(sender:UIButton) {
+        
+        if sender.tag == 0 {
+            // ループをONにする
+            
+            // アイコンを変える
+            let onLoopImage:UIImage = UIImage(named: "loop-on")!
+            sender.setImage(onLoopImage, for: .normal)
+        
+            self.isLooping = true
+            
+            // タグを設定
+            sender.tag = 1
+            
+        } else {
+            //　ループをOFFにする
+            
+            //　アイコンを変える
+            let offLoopImage:UIImage = UIImage(named: "loop-off")!
+            sender.setImage(offLoopImage, for: .normal)
+            
+            self.isLooping = false
+            
+            // タグを設定
+            sender.tag = 0
+        }
+    }
 }
 
 // MARK: - DELEGATE
 extension CaptureAndPlayViewController {
+    
+    /**
+     * captureOutput()はカメラからQRコードを認識したときに反応します
+     *
+     */
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
         // 複数のメタデータを検出
@@ -390,6 +636,55 @@ extension CaptureAndPlayViewController {
                     print("got data: \(metadata.stringValue!)")
                 }
             }
+        }
+    }
+    
+    /**
+     * getAudioResouce()は音源を取得した時に反応します
+     *
+     */
+    func getAudioResouce(){
+        // ファイル名から音源を再生
+        let fileName:String = "sound01"
+        findVoiceSound(fileName: fileName)
+        
+        // 現在のオーディオリソースを確認
+        do {
+            if recognizeCurrentAudioRoute() == "speaker" {
+                try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+            }
+        } catch {
+            print("failed to recognize audioRoute")
+        }
+        self.audioPlayer.delegate = self
+        self.audioPlayer.enableRate = true
+    }
+    
+    
+    /**
+     * audioPlayerDidFinishPlaying()は音源が終了したときに反応します
+     *
+     */
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("finished")
+        
+        // ループ設定に応じて、audioPlayerの振舞いを変える
+        if self.isLooping {
+            
+            //　冒頭から再生する
+            self.audioPlayer.currentTime = 0
+            self.audioPlayer.play()
+            
+            startTimer()
+        } else {
+            
+            // タイマーを終了する
+            timer.invalidate()
+            
+            // 再生ボタンをリセットする
+            let playImage:UIImage = UIImage(named: "play")!
+            self.playButton.setImage(playImage, for: .normal)
+            self.playButton.tag = 0
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2602731EEE91360092AB27 /* sound01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602721EEE91360092AB27 /* sound01.mp3 */; };
 		3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */; };
 		3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFE1EE409ED008CA08F /* Main.storyboard */; };
 		3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FD011EE409ED008CA08F /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2602721EEE91360092AB27 /* sound01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound01.mp3; sourceTree = "<group>"; };
 		3BB5FCF71EE409ED008CA08F /* qrCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qrCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BB5FCFF1EE409ED008CA08F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +59,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3B2602701EEE911D0092AB27 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B2602711EEE912C0092AB27 /* Sounds */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		3B2602711EEE912C0092AB27 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3B2602721EEE91360092AB27 /* sound01.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		3BB5FCEE1EE409ED008CA08F = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +96,7 @@
 		3BB5FCF91EE409ED008CA08F /* qrCapture */ = {
 			isa = PBXGroup;
 			children = (
+				3B2602701EEE911D0092AB27 /* Resources */,
 				3BB5FD141EE40D61008CA08F /* Parameters */,
 				3BB5FD111EE40CFE008CA08F /* Functions */,
 				3BB5FD0C1EE40AE0008CA08F /* CV */,
@@ -189,6 +208,7 @@
 			files = (
 				3BB5FD051EE409ED008CA08F /* LaunchScreen.storyboard in Resources */,
 				3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */,
+				3B2602731EEE91360092AB27 /* sound01.mp3 in Resources */,
 				3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

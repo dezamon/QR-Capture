@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5F3DC0BF67A764762C9DE56415E5574C"
+               BlueprintIdentifier = "488F6F505CD5C33885928512B372C410"
                BuildableName = "Pods_qrCapture.framework"
                BlueprintName = "Pods-qrCapture"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5F3DC0BF67A764762C9DE56415E5574C"
+            BlueprintIdentifier = "488F6F505CD5C33885928512B372C410"
             BuildableName = "Pods_qrCapture.framework"
             BlueprintName = "Pods-qrCapture"
             ReferencedContainer = "container:Pods.xcodeproj">
