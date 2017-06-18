@@ -11,6 +11,8 @@ import AVFoundation
 
 import AVFoundation
 import MediaPlayer
+import Firebase
+import FirebaseDatabase
 
 class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVAudioPlayerDelegate {
 
@@ -23,6 +25,8 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
     let qrCodeView:UIView = UIView()
 
     var audioPlayer: AVAudioPlayer!
+    var currentAudioFileName:String = ""
+    var firRef:DatabaseReference?
     var isSliderTapping:Bool = false
     var isLooping:Bool = false
     var timer:Timer = Timer()
@@ -61,7 +65,11 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
         // AudioPlayerを初期化します
         initAudioPlayer()
         
-        getAudioResouce()
+        //getAudioResouce()
+        //getAudioResouceByFirebase(src: "audio0001.mp3")
+        
+        // FirebaseのDBを初期化する
+        initFirebase()
     }
 
     override func didReceiveMemoryWarning() {
@@ -486,6 +494,17 @@ extension CaptureAndPlayViewController {
             self.playerSlider.value = Float(ap.currentTime)
         }
     }
+    
+    /**
+     * getDataFromQR()はQRコードからトラック情報を取得します
+     *
+     * parameter - urlString: トラック情報へのURL
+     */
+    func getDataFromQR(urlString:String){
+        self.firRef?.child(urlString).observeSingleEvent(of: .value, with: { (snap:DataSnapshot) in
+            print(snap)
+        })
+    }
 }
 
 
@@ -634,6 +653,12 @@ extension CaptureAndPlayViewController {
                 if metadata.stringValue != nil {
                     // 検出データを取得
                     print("got data: \(metadata.stringValue!)")
+                    
+                    // QRコードからローカルの音源を取得
+                    getAudioResouce(name: metadata.stringValue!)
+                    
+                    // QRコードからトラック情報を取得
+                    //getDataFromQR(urlString: "section/1/1")
                 }
             }
         }
@@ -642,22 +667,85 @@ extension CaptureAndPlayViewController {
     /**
      * getAudioResouce()は音源を取得した時に反応します
      *
+     * parameter - name: ファイル名
      */
-    func getAudioResouce(){
-        // ファイル名から音源を再生
-        let fileName:String = "sound01"
-        findVoiceSound(fileName: fileName)
+    func getAudioResouce(name:String){
         
-        // 現在のオーディオリソースを確認
-        do {
-            if recognizeCurrentAudioRoute() == "speaker" {
-                try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+        // 新しいファイル名を検知した時のみ、音源を取得する
+        if currentAudioFileName != name {
+            // ファイル名から音源を再生
+            //let fileName:String = "sound01"
+            findVoiceSound(fileName: name)
+            
+            // 現在のオーディオリソースを確認
+            do {
+                if recognizeCurrentAudioRoute() == "speaker" {
+                    try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+                }
+            } catch {
+                print("failed to recognize audioRoute")
             }
-        } catch {
-            print("failed to recognize audioRoute")
+            self.audioPlayer.delegate = self
+            self.audioPlayer.enableRate = true
+            
+            // ファイル名をcurrentAudioFileNameに格納
+            currentAudioFileName = name
+    
+            print("got new audio resouce")
         }
-        self.audioPlayer.delegate = self
-        self.audioPlayer.enableRate = true
+    }
+    
+    /**
+     * getAudioResouceByFirebase()は音源をFirebaseのストレージから取得します
+     *
+     */
+    func getAudioResouceByFirebase(src:String){
+        
+        // ストレージサービスへの参照を取得する
+        let storage = Storage.storage()
+        
+        // バックエンドのストレージサービスへの参照を作成する
+        let storageRef = storage.reference(forURL: "gs://qr-demo-1338b.appspot.com/")
+        
+        // 音声ファイルへの参照先を作る
+        let audioRef = storageRef.child("chapter1/\(src)")
+        
+        audioRef.downloadURL { (url:URL?, error:Error?) in
+            
+            if (error != nil) {
+                print(error?.localizedDescription)
+            } else {
+                
+                var audioData:NSData = NSData()
+                
+                NSData.loadAsyncFromURL(url: url!, callback: { (data:NSData?) in
+                    audioData = data!
+                    
+                    do {
+                        self.audioPlayer = try AVAudioPlayer(data: audioData as Data)
+                        self.audioPlayer.prepareToPlay()
+                        print("we are ready to play")
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                })
+                
+                    //self.audioPlayer = try AVAudioPlayer(contentsOf: url!)
+                    //self.audioPlayer.prepareToPlay()
+              
+                // 音声ファイルを探す
+                /*
+                let voiceSoundURL:URL =  URL(fileURLWithPath: Bundle.main.path(forResource: fileName, ofType: "mp3")!)
+                
+                do {
+                    self.audioPlayer = try AVAudioPlayer(contentsOf: voiceSoundURL)
+                    self.audioPlayer.prepareToPlay()
+                } catch {
+                    print("can not play sound")
+                }
+                */
+            }
+        }
     }
     
     
@@ -702,5 +790,13 @@ extension CaptureAndPlayViewController {
         self.tabBarController?.tabBar.tintColor = colorPink
         self.tabBarController?.tabBar.barTintColor = colorGrayThin3
         self.tabBarController?.tabBar.isTranslucent = true
+    }
+    
+    /**
+     * initFirebase()はFirebaseのDBを使用するために初期化します
+     *
+     */
+    func initFirebase(){
+        firRef = Database.database().reference()
     }
 }
