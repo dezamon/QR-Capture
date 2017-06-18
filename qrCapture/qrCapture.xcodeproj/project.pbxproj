@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B2602731EEE91360092AB27 /* sound01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602721EEE91360092AB27 /* sound01.mp3 */; };
+		3B2602731EEE91360092AB27 /* audio0001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602721EEE91360092AB27 /* audio0001.mp3 */; };
 		3B2602751EEEBF8A0092AB27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */; };
+		3B8EAD5D1EF5A19C00C8BE15 /* customExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */; };
+		3B8EAD5F1EF6BC4C00C8BE15 /* audio0002.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD5E1EF6BC4C00C8BE15 /* audio0002.mp3 */; };
 		3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */; };
 		3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFE1EE409ED008CA08F /* Main.storyboard */; };
 		3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FD011EE409ED008CA08F /* Assets.xcassets */; };
@@ -22,8 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B2602721EEE91360092AB27 /* sound01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sound01.mp3; sourceTree = "<group>"; };
+		3B2602721EEE91360092AB27 /* audio0001.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio0001.mp3; sourceTree = "<group>"; };
 		3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customExtensions.swift; sourceTree = "<group>"; };
+		3B8EAD5E1EF6BC4C00C8BE15 /* audio0002.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = audio0002.mp3; sourceTree = "<group>"; };
 		3BB5FCF71EE409ED008CA08F /* qrCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qrCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BB5FCFF1EE409ED008CA08F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,9 +76,18 @@
 		3B2602711EEE912C0092AB27 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				3B2602721EEE91360092AB27 /* sound01.mp3 */,
+				3B8EAD5E1EF6BC4C00C8BE15 /* audio0002.mp3 */,
+				3B2602721EEE91360092AB27 /* audio0001.mp3 */,
 			);
 			name = Sounds;
+			sourceTree = "<group>";
+		};
+		3B8EAD5B1EF5A17500C8BE15 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */,
+			);
+			name = Custom;
 			sourceTree = "<group>";
 		};
 		3BB5FCEE1EE409ED008CA08F = {
@@ -98,6 +111,7 @@
 		3BB5FCF91EE409ED008CA08F /* qrCapture */ = {
 			isa = PBXGroup;
 			children = (
+				3B8EAD5B1EF5A17500C8BE15 /* Custom */,
 				3B2602701EEE911D0092AB27 /* Resources */,
 				3BB5FD141EE40D61008CA08F /* Parameters */,
 				3BB5FD111EE40CFE008CA08F /* Functions */,
@@ -212,7 +226,8 @@
 				3BB5FD051EE409ED008CA08F /* LaunchScreen.storyboard in Resources */,
 				3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */,
 				3B2602751EEEBF8A0092AB27 /* GoogleService-Info.plist in Resources */,
-				3B2602731EEE91360092AB27 /* sound01.mp3 in Resources */,
+				3B8EAD5F1EF6BC4C00C8BE15 /* audio0002.mp3 in Resources */,
+				3B2602731EEE91360092AB27 /* audio0001.mp3 in Resources */,
 				3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +291,7 @@
 				3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */,
 				3BB5FD101EE40C43008CA08F /* TabBarViewController.swift in Sources */,
 				3BB5FD161EE40D7C008CA08F /* Params.swift in Sources */,
+				3B8EAD5D1EF5A19C00C8BE15 /* customExtensions.swift in Sources */,
 				3BB5FD0E1EE40B53008CA08F /* CaptureAndPlayViewController.swift in Sources */,
 				3BB5FD181EE411AB008CA08F /* LikeSoundListViewController.swift in Sources */,
 			);
