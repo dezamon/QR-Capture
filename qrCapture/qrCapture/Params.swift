@@ -12,6 +12,8 @@ import UIKit
 // Colors
 let colorGray:UIColor = UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)
 let colorGrayDark:UIColor = UIColor(red:0.19, green:0.19, blue:0.19, alpha:1.00)
+let colorGrayDark2:UIColor = UIColor(red:0.28, green:0.28, blue:0.28, alpha:1.00)
+let colorGrayDark3:UIColor = UIColor(red:0.59, green:0.59, blue:0.59, alpha:1.00)
 let colorGrayThin:UIColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1.00)
 let colorGrayThin2:UIColor = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1.00)
 let colorGrayThin3:UIColor = UIColor(red:0.97, green:0.97, blue:0.97, alpha:1.00)
@@ -27,6 +29,7 @@ let fontFuturaCM:String = "Futura-CondensedMedium"
 let fontArialBMT:String = "ArialHebrew-Bold"
 let fontHirakakuW6:String = "HiraKakuProN-W6"
 let fontHirakakuN3:String = "HiraKakuProN-W3"
+let fontHiramaru:String = "HiraMaruProN-W4"
 let fontYugothic:String = "YuGothic"
 let fontRounded:String = "rounded-regular" //rounded-regular
 let fontSize:CGFloat = 13

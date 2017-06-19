@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2602731EEE91360092AB27 /* abc-10001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602721EEE91360092AB27 /* abc-10001.mp3 */; };
+		3B2602751EEEBF8A0092AB27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */; };
+		3B8EAD5D1EF5A19C00C8BE15 /* customExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */; };
+		3B8EAD5F1EF6BC4C00C8BE15 /* abc-10002.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD5E1EF6BC4C00C8BE15 /* abc-10002.mp3 */; };
+		3B8EAD621EF6C0B100C8BE15 /* track.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD611EF6C0B100C8BE15 /* track.json */; };
+		3B8EAD661EF7D58900C8BE15 /* abc-10003.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD631EF7D58900C8BE15 /* abc-10003.mp3 */; };
+		3B8EAD671EF7D58900C8BE15 /* abc-10004.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD641EF7D58900C8BE15 /* abc-10004.mp3 */; };
+		3B8EAD681EF7D58900C8BE15 /* abc-10005.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD651EF7D58900C8BE15 /* abc-10005.mp3 */; };
+		3B8EAD6A1EF7E1C300C8BE15 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */; };
 		3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */; };
 		3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFE1EE409ED008CA08F /* Main.storyboard */; };
 		3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FD011EE409ED008CA08F /* Assets.xcassets */; };
@@ -16,9 +25,19 @@
 		3BB5FD131EE40D2F008CA08F /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FD121EE40D2F008CA08F /* Constraint.swift */; };
 		3BB5FD161EE40D7C008CA08F /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FD151EE40D7C008CA08F /* Params.swift */; };
 		3BB5FD181EE411AB008CA08F /* LikeSoundListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FD171EE411AB008CA08F /* LikeSoundListViewController.swift */; };
+		C2A4F3AE9CE3FE8D5400B2B8 /* Pods_qrCapture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C12B2629D0E323308DDBD5 /* Pods_qrCapture.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2602721EEE91360092AB27 /* abc-10001.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10001.mp3"; sourceTree = "<group>"; };
+		3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customExtensions.swift; sourceTree = "<group>"; };
+		3B8EAD5E1EF6BC4C00C8BE15 /* abc-10002.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10002.mp3"; sourceTree = "<group>"; };
+		3B8EAD611EF6C0B100C8BE15 /* track.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = track.json; sourceTree = "<group>"; };
+		3B8EAD631EF7D58900C8BE15 /* abc-10003.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10003.mp3"; sourceTree = "<group>"; };
+		3B8EAD641EF7D58900C8BE15 /* abc-10004.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10004.mp3"; sourceTree = "<group>"; };
+		3B8EAD651EF7D58900C8BE15 /* abc-10005.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10005.mp3"; sourceTree = "<group>"; };
+		3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		3BB5FCF71EE409ED008CA08F /* qrCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qrCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BB5FCFF1EE409ED008CA08F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,6 +49,9 @@
 		3BB5FD121EE40D2F008CA08F /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		3BB5FD151EE40D7C008CA08F /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
 		3BB5FD171EE411AB008CA08F /* LikeSoundListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeSoundListViewController.swift; sourceTree = "<group>"; };
+		5368FB3F3006D5DA0CE9A692 /* Pods-qrCapture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qrCapture.release.xcconfig"; path = "Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture.release.xcconfig"; sourceTree = "<group>"; };
+		79CE7EAB1393FB182C9D5922 /* Pods-qrCapture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qrCapture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture.debug.xcconfig"; sourceTree = "<group>"; };
+		98C12B2629D0E323308DDBD5 /* Pods_qrCapture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qrCapture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +59,67 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2A4F3AE9CE3FE8D5400B2B8 /* Pods_qrCapture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1F1AB19A36228919A3AB54 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79CE7EAB1393FB182C9D5922 /* Pods-qrCapture.debug.xcconfig */,
+				5368FB3F3006D5DA0CE9A692 /* Pods-qrCapture.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3B2602701EEE911D0092AB27 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B8EAD601EF6C05B00C8BE15 /* Json */,
+				3B2602711EEE912C0092AB27 /* Sounds */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		3B2602711EEE912C0092AB27 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3B2602721EEE91360092AB27 /* abc-10001.mp3 */,
+				3B8EAD5E1EF6BC4C00C8BE15 /* abc-10002.mp3 */,
+				3B8EAD631EF7D58900C8BE15 /* abc-10003.mp3 */,
+				3B8EAD641EF7D58900C8BE15 /* abc-10004.mp3 */,
+				3B8EAD651EF7D58900C8BE15 /* abc-10005.mp3 */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		3B8EAD5B1EF5A17500C8BE15 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */,
+				3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		3B8EAD601EF6C05B00C8BE15 /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				3B8EAD611EF6C0B100C8BE15 /* track.json */,
+			);
+			name = Json;
+			sourceTree = "<group>";
+		};
 		3BB5FCEE1EE409ED008CA08F = {
 			isa = PBXGroup;
 			children = (
 				3BB5FCF91EE409ED008CA08F /* qrCapture */,
 				3BB5FCF81EE409ED008CA08F /* Products */,
+				2F1F1AB19A36228919A3AB54 /* Pods */,
+				516F333E1D3613AF26587C72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +134,8 @@
 		3BB5FCF91EE409ED008CA08F /* qrCapture */ = {
 			isa = PBXGroup;
 			children = (
+				3B8EAD5B1EF5A17500C8BE15 /* Custom */,
+				3B2602701EEE911D0092AB27 /* Resources */,
 				3BB5FD141EE40D61008CA08F /* Parameters */,
 				3BB5FD111EE40CFE008CA08F /* Functions */,
 				3BB5FD0C1EE40AE0008CA08F /* CV */,
@@ -70,6 +144,7 @@
 				3BB5FD011EE409ED008CA08F /* Assets.xcassets */,
 				3BB5FD031EE409ED008CA08F /* LaunchScreen.storyboard */,
 				3BB5FD061EE409ED008CA08F /* Info.plist */,
+				3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */,
 			);
 			path = qrCapture;
 			sourceTree = "<group>";
@@ -100,6 +175,14 @@
 			name = Parameters;
 			sourceTree = "<group>";
 		};
+		516F333E1D3613AF26587C72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				98C12B2629D0E323308DDBD5 /* Pods_qrCapture.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,9 +190,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BB5FD091EE409ED008CA08F /* Build configuration list for PBXNativeTarget "qrCapture" */;
 			buildPhases = (
+				6CBFBA06C8AC60C6D7E9E5D9 /* [CP] Check Pods Manifest.lock */,
 				3BB5FCF31EE409ED008CA08F /* Sources */,
 				3BB5FCF41EE409ED008CA08F /* Frameworks */,
 				3BB5FCF51EE409ED008CA08F /* Resources */,
+				282A624E41309212A5ACA6CD /* [CP] Embed Pods Frameworks */,
+				0FFD0081468B071DCE60FE07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,11 +248,66 @@
 			files = (
 				3BB5FD051EE409ED008CA08F /* LaunchScreen.storyboard in Resources */,
 				3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */,
+				3B2602751EEEBF8A0092AB27 /* GoogleService-Info.plist in Resources */,
+				3B8EAD671EF7D58900C8BE15 /* abc-10004.mp3 in Resources */,
+				3B8EAD5F1EF6BC4C00C8BE15 /* abc-10002.mp3 in Resources */,
+				3B2602731EEE91360092AB27 /* abc-10001.mp3 in Resources */,
+				3B8EAD661EF7D58900C8BE15 /* abc-10003.mp3 in Resources */,
+				3B8EAD681EF7D58900C8BE15 /* abc-10005.mp3 in Resources */,
 				3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */,
+				3B8EAD621EF6C0B100C8BE15 /* track.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0FFD0081468B071DCE60FE07 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		282A624E41309212A5ACA6CD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-qrCapture/Pods-qrCapture-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CBFBA06C8AC60C6D7E9E5D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3BB5FCF31EE409ED008CA08F /* Sources */ = {
@@ -174,9 +315,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB5FD131EE40D2F008CA08F /* Constraint.swift in Sources */,
+				3B8EAD6A1EF7E1C300C8BE15 /* RealmModels.swift in Sources */,
 				3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */,
 				3BB5FD101EE40C43008CA08F /* TabBarViewController.swift in Sources */,
 				3BB5FD161EE40D7C008CA08F /* Params.swift in Sources */,
+				3B8EAD5D1EF5A19C00C8BE15 /* customExtensions.swift in Sources */,
 				3BB5FD0E1EE40B53008CA08F /* CaptureAndPlayViewController.swift in Sources */,
 				3BB5FD181EE411AB008CA08F /* LikeSoundListViewController.swift in Sources */,
 			);
@@ -299,6 +442,7 @@
 		};
 		3BB5FD0A1EE409ED008CA08F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79CE7EAB1393FB182C9D5922 /* Pods-qrCapture.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3R57U2AL9J;
@@ -306,12 +450,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = us.taka.qrCapture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		3BB5FD0B1EE409ED008CA08F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5368FB3F3006D5DA0CE9A692 /* Pods-qrCapture.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3R57U2AL9J;
@@ -319,6 +465,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = us.taka.qrCapture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -342,6 +489,7 @@
 				3BB5FD0B1EE409ED008CA08F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
