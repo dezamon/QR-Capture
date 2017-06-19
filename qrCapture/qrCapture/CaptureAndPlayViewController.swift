@@ -14,6 +14,8 @@ import MediaPlayer
 import SwiftyJSON
 import Firebase
 import FirebaseDatabase
+import Realm
+import RealmSwift
 
 class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVAudioPlayerDelegate {
 
@@ -21,6 +23,7 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
     let captureView:UIView = UIView()
     let captureSession:AVCaptureSession = AVCaptureSession()
     let controllerPanelView:UIView = UIView()
+    let likeButton:UIButton = UIButton()
     let maxTrackIndex:Int = 10005
     let minTrackIndex:Int = 10001
     let playerSlider:UISlider = UISlider()
@@ -342,9 +345,11 @@ extension CaptureAndPlayViewController {
         //
         
         let likeImage:UIImage = UIImage(named: "like-gray-off")!
-        let likeButton:UIButton = UIButton()
         likeButton.setImage(likeImage, for: .normal)
         likeButton.imageView?.contentMode = .scaleAspectFit
+        
+        //　アクションを追加
+        likeButton.addTarget(self, action: #selector(self.likeButtonIsTapped), for: .touchUpInside)
         
         _ = customSizeConstraint.button.defineSize(item: likeButton, width: buttonSize3, height: buttonSize3)
         self.controllerPanelView.addSubview(likeButton)
@@ -394,32 +399,6 @@ extension CaptureAndPlayViewController {
         } catch {
             print(error.localizedDescription)
         }
-        
-        //let videoInput = try! AVCaptureDeviceInput.init(device: videoDevice)
-        /*
-        captureSession.addInput(videoInput)
-        
-        // 出力（メタデータ）
-        let metadataOutput:AVCaptureMetadataOutput = AVCaptureMetadataOutput()
-        captureSession.addOutput(metadataOutput)
-        
-        // QRコードを検出した歳のデリゲートの設定
-        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        
-        // QRコードの認識を設定
-        metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
-        
-        // プレビューを表示
-        videoLayer = AVCaptureVideoPreviewLayer.init(session: captureSession)
-        videoLayer?.frame = self.captureView.bounds
-        videoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        captureView.layer.addSublayer(videoLayer!)
-        
-        // セッション開始
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.captureSession.startRunning()
-        }
-        */
     }
     
     
@@ -618,8 +597,29 @@ extension CaptureAndPlayViewController {
         // audioPlayerの再生時間をリセット
         audioPlayer.currentTime = 0
         
+        // トラックのお気に入り状態を確認
+        self.checkThisTrackLikeCondition()
+        
     }
-
+    
+    /**
+     * checkThisTrackLikeCondition()は現在のトラックが
+     *　お気に入りに登録されているか確認します
+     *
+     */
+    func checkThisTrackLikeCondition(){
+        // このトラックがDBに格納されていないか確認
+        let realm:Realm = try! Realm()
+        let trackIndex:Int = self.currentTrackIndex
+        if let thisLikeTrackObj = realm.objects(likeTrack.self).filter("index == \(trackIndex)").first {
+            print("this track is marked as LIKE")
+            // ハートアイコンの色をオンにする
+            self.likeButton.setImage(UIImage(named:"like-gray-on"), for: .normal)
+        } else {
+            // ハートアイコンの色をオフにする
+            self.likeButton.setImage(UIImage(named:"like-gray-off"), for: .normal)
+        }
+    }
 }
 
 
@@ -781,6 +781,80 @@ extension CaptureAndPlayViewController {
         
         print("currentTrackIndex:\(currentTrackIndex)")
     }
+    
+    /**
+     * likeButtonIsTapped()はお気に入りボタンが
+     * タップされたときに動作します。
+     *
+     */
+    func likeButtonIsTapped(){
+        print("like button is tapped")
+        
+        //　デフォルトのRealmを取得する
+        let realm = try! Realm()
+        
+        // このトラックがDBに格納されていないか確認
+        let trackIndex:Int = self.currentTrackIndex
+        if let thisLikeTrackObj = realm.objects(likeTrack.self).filter("index == \(trackIndex)").first {
+            print("this track already is in DB")
+            print(thisLikeTrackObj.index)
+            print(thisLikeTrackObj.chapter)
+            print(thisLikeTrackObj.section)
+            print(thisLikeTrackObj.audio)
+            
+            //　DBから削除
+            do {
+                try realm.write {
+                    realm.delete(thisLikeTrackObj)
+                    
+                    // ハートアイコンの色をオフにする
+                    self.likeButton.setImage(UIImage(named:"like-gray-off"), for: .normal)
+                    
+                    print("this like track has been deleted from DB")
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else {
+            
+            let likeTrackObj:likeTrack = likeTrack()
+            
+            // インスタンスの作成と値の格納
+            likeTrackObj.index = self.currentTrackIndex
+            likeTrackObj.chapter = trackTitleLabel.text!
+            likeTrackObj.section = subLabel.text!
+            likeTrackObj.audio = currentAudioFileName
+            
+            print(likeTrackObj.index)
+            print(likeTrackObj.chapter)
+            
+            //　データの永続化
+            do {
+                try realm.write {
+                    realm.add(likeTrackObj)
+                    
+                    // ハートアイコンの色をオンにする
+                    self.likeButton.setImage(UIImage(named:"like-gray-on"), for: .normal)
+                    print("store new like track!")
+                    
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.likeButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                    }, completion: { (Bool) in
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.likeButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                        }, completion: { (Bool) in
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.likeButton.transform = CGAffineTransform.identity
+
+                            })
+                        })
+                    })
+                }
+            } catch{
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 // MARK: - DELEGATE
@@ -818,6 +892,9 @@ extension CaptureAndPlayViewController {
                     
                         // 音源のインデックスを更新する
                         self.currentTrackIndex = Int(splitedCode[1])!
+                        
+                        // トラックのお気に入り状態を確認
+                        self.checkThisTrackLikeCondition()
                     } else {
                         print("this app does not support this code")
                     }
