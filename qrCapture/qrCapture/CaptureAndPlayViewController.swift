@@ -17,19 +17,21 @@ import FirebaseDatabase
 
 class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, AVAudioPlayerDelegate {
 
+    let bookUID:String = "abc"
     let captureView:UIView = UIView()
     let captureSession:AVCaptureSession = AVCaptureSession()
     let controllerPanelView:UIView = UIView()
+    let maxTrackIndex:Int = 10005
+    let minTrackIndex:Int = 10001
     let playerSlider:UISlider = UISlider()
     let playButton:UIButton = UIButton()
-    let bookUID:String = "abc"
     let subLabel:UILabel = UILabel()
     let trackTitleLabel:UILabel = UILabel()
     let qrCodeView:UIView = UIView()
 
     var audioPlayer: AVAudioPlayer!
     var currentAudioFileName:String = ""
-    var currentTrackIndex:Int = 10001
+    var currentTrackIndex:Int = 0
     var firRef:DatabaseReference?
     var isSliderTapping:Bool = false
     var isLooping:Bool = false
@@ -40,7 +42,7 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.green
+        self.view.backgroundColor = UIColor.white
         
         // タブバーの色などを初期化します
         initializeTabBar()
@@ -580,6 +582,43 @@ extension CaptureAndPlayViewController {
             
         }
     }
+    
+    /**
+     * getTrackAndAudioByGeneratedCode()は生成したトラックIDをもとに
+     *　音源とトラック情報を取得します。
+     *
+     */
+    func getTrackAndAudioByGeneratedCode() {
+        
+        // trackIndexとbookUIDを使って音源を指定する
+        let newAudioIndex:String = "\(bookUID)-\(currentTrackIndex)"
+        
+        // QRコードからローカルの音源を取得
+        getAudioResouce(name: newAudioIndex)
+        
+        // QRコードからトラック情報を取得
+        getTrackTitleFromJson(name: newAudioIndex)
+        
+        // 再生アイコンに変える
+        let playImage:UIImage = UIImage(named: "play")!
+        self.playButton.setImage(playImage, for: .normal)
+        
+        // タグを設定
+        self.playButton.tag = 0
+        
+        // タイマーを停止
+        timer.invalidate()
+        
+        // 音声を一時停止する
+        audioPlayer.pause()
+        
+        // スライダーの位置をリセット
+        playerSlider.value = 0.0
+        
+        // audioPlayerの再生時間をリセット
+        audioPlayer.currentTime = 0
+        
+    }
 
 }
 
@@ -714,6 +753,15 @@ extension CaptureAndPlayViewController {
      */
     func prevTrackButtonIsTapped(){
         print("go to prev track")
+        
+        if self.minTrackIndex < self.currentTrackIndex {
+            self.currentTrackIndex -= 1
+        
+            // trackIndexとbookUIDを使って音源を指定する
+            getTrackAndAudioByGeneratedCode()
+        }
+        
+        print("currentTrackIndex:\(currentTrackIndex)")
     }
     
     /**
@@ -723,6 +771,15 @@ extension CaptureAndPlayViewController {
      */
     func nextTrackButtonIsTapped(){
         print("go to next track")
+        
+        if self.maxTrackIndex > self.currentTrackIndex {
+            self.currentTrackIndex += 1
+            
+            // trackIndexとbookUIDを使って音源を指定する
+            getTrackAndAudioByGeneratedCode()
+        }
+        
+        print("currentTrackIndex:\(currentTrackIndex)")
     }
 }
 
@@ -744,7 +801,7 @@ extension CaptureAndPlayViewController {
                 
                 // 取得した位置をQRコードのマーカーに反映
                 qrCodeView.frame = barCode.bounds
-                if metadata.stringValue != nil {
+                if metadata.stringValue != nil && metadata.stringValue != currentAudioFileName {
                     // 検出データを取得
                     print("got data: \(metadata.stringValue!)")
                     
@@ -752,11 +809,15 @@ extension CaptureAndPlayViewController {
                     let splitedCode = metadata.stringValue!.components(separatedBy: "-")
                     
                     if splitedCode[0] == bookUID {
+                        
                         // QRコードからローカルの音源を取得
                         getAudioResouce(name: metadata.stringValue!)
                         
                         // QRコードからトラック情報を取得
                         getTrackTitleFromJson(name: metadata.stringValue!)
+                    
+                        // 音源のインデックスを更新する
+                        self.currentTrackIndex = Int(splitedCode[1])!
                     } else {
                         print("this app does not support this code")
                     }
