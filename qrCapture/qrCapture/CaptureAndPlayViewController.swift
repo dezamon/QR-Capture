@@ -11,6 +11,7 @@ import AVFoundation
 
 import AVFoundation
 import MediaPlayer
+import SwiftyJSON
 import Firebase
 import FirebaseDatabase
 
@@ -21,11 +22,14 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
     let controllerPanelView:UIView = UIView()
     let playerSlider:UISlider = UISlider()
     let playButton:UIButton = UIButton()
+    let bookUID:String = "abc"
     let subLabel:UILabel = UILabel()
+    let trackTitleLabel:UILabel = UILabel()
     let qrCodeView:UIView = UIView()
 
     var audioPlayer: AVAudioPlayer!
     var currentAudioFileName:String = ""
+    var currentTrackIndex:Int = 10001
     var firRef:DatabaseReference?
     var isSliderTapping:Bool = false
     var isLooping:Bool = false
@@ -70,6 +74,8 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
         
         // FirebaseのDBを初期化する
         initFirebase()
+        
+        getTrackTitleFromJson(name: "abc10002")
     }
 
     override func didReceiveMemoryWarning() {
@@ -174,7 +180,6 @@ extension CaptureAndPlayViewController {
         let subLabelVmargin:CGFloat = 10
         
         // トラックタイトル用のラベルを作成
-        let trackTitleLabel:UILabel = UILabel()
         trackTitleLabel.font = UIFont(name: fontHirakakuW6, size: fontSizeL)
         trackTitleLabel.textColor = colorGrayDark2
         trackTitleLabel.text = "基本の挨拶"
@@ -505,6 +510,71 @@ extension CaptureAndPlayViewController {
             print(snap)
         })
     }
+    
+    
+    /**
+     * getJsonFile()はアプリ内に格納されたJSONファイルを取得します
+     *
+     * - parameter name: notificationの名前
+     */
+    func getJsonFile(fileName:String, completionHandler:@escaping (JSON) -> ()) {
+        
+        let bundlePathToJson:String? = Bundle.main.path(forResource: fileName, ofType: "json")
+        
+        // ファイルへのパスが実際に存在するか確認する
+        if let exsitedBundlePath = bundlePathToJson {
+            // バンドルバスが存在する場合
+            let urlPath:URL? = URL(fileURLWithPath: exsitedBundlePath)
+            
+            if let exsitedURLPath = urlPath {
+                
+                // NSDataモデルを作成する
+                let jsonData:Data? = try? Data(contentsOf: exsitedURLPath)
+                let json = JSON(jsonData)
+                
+                completionHandler(json)
+            }
+        }
+    }
+    
+    /**
+     * getTrackTitleFromJson()はファイル名を元にJSONからトラック名を取得します
+     *
+     * parameter - name: ファイル名
+     */
+    func getTrackTitleFromJson(name:String){
+        
+        // ファイル名からJSONデータを取得
+        getJsonFile(fileName: "track") { (trackJSON:JSON) in
+            
+            print("json:\(trackJSON[0])")
+            
+            // ファイル名から値を取得
+            guard let track = trackJSON[0][name].dictionary else {
+                return
+            }
+            
+            // チャプターを取得
+            guard let chapter = track["chapter"]?.string else {
+                return
+            }
+            
+            // セクションを取得
+            guard let section = track["section"]?.string else {
+                return
+            }
+            
+            // ラベルにテキストを設定
+            self.trackTitleLabel.text = chapter
+            self.subLabel.text = section
+            
+            print("track:\(track)")
+            print("chapter:\(chapter)")
+            print("section:\(section)")
+            
+        }
+    }
+
 }
 
 
@@ -658,6 +728,7 @@ extension CaptureAndPlayViewController {
                     getAudioResouce(name: metadata.stringValue!)
                     
                     // QRコードからトラック情報を取得
+                    getTrackTitleFromJson(name: metadata.stringValue!)
                     //getDataFromQR(urlString: "section/1/1")
                 }
             }
@@ -673,8 +744,8 @@ extension CaptureAndPlayViewController {
         
         // 新しいファイル名を検知した時のみ、音源を取得する
         if currentAudioFileName != name {
+
             // ファイル名から音源を再生
-            //let fileName:String = "sound01"
             findVoiceSound(fileName: name)
             
             // 現在のオーディオリソースを確認
@@ -694,6 +765,7 @@ extension CaptureAndPlayViewController {
             print("got new audio resouce")
         }
     }
+    
     
     /**
      * getAudioResouceByFirebase()は音源をFirebaseのストレージから取得します
