@@ -287,6 +287,9 @@ extension CaptureAndPlayViewController {
         skipPrevButton.setImage(skipPrevImage, for: .normal)
         skipPrevButton.imageView?.contentMode = .scaleAspectFit
         
+        //　アクションを追加
+        skipPrevButton.addTarget(self, action: #selector(self.prevTrackButtonIsTapped), for: .touchUpInside)
+        
         _ = customSizeConstraint.button.defineSize(item: skipPrevButton, width: buttonSize2, height: buttonSize2)
         
         self.controllerPanelView.addSubview(skipPrevButton)
@@ -301,6 +304,9 @@ extension CaptureAndPlayViewController {
         let skipNextButton:UIButton = UIButton()
         skipNextButton.setImage(skipNextImage, for: .normal)
         skipNextButton.imageView?.contentMode = .scaleAspectFit
+        
+        // アクションを追加
+        skipNextButton.addTarget(self, action: #selector(self.nextTrackButtonIsTapped), for: .touchUpInside)
         
         _ = customSizeConstraint.button.defineSize(item: skipNextButton, width: buttonSize2, height: buttonSize2)
         
@@ -700,6 +706,24 @@ extension CaptureAndPlayViewController {
             sender.tag = 0
         }
     }
+    
+    /**
+     * prevTrackButtonIsTapped()は前のトラックに移動するボタンが
+     * タップされたときに動作します。
+     *
+     */
+    func prevTrackButtonIsTapped(){
+        print("go to prev track")
+    }
+    
+    /**
+     * nextTrackButtonIsTapped()は次のトラックに移動するボタンが
+     * タップされたときに動作します。
+     *
+     */
+    func nextTrackButtonIsTapped(){
+        print("go to next track")
+    }
 }
 
 // MARK: - DELEGATE
@@ -724,11 +748,19 @@ extension CaptureAndPlayViewController {
                     // 検出データを取得
                     print("got data: \(metadata.stringValue!)")
                     
-                    // QRコードからローカルの音源を取得
-                    getAudioResouce(name: metadata.stringValue!)
+                    // 検出したコードをハイフンで分割する
+                    let splitedCode = metadata.stringValue!.components(separatedBy: "-")
                     
-                    // QRコードからトラック情報を取得
-                    getTrackTitleFromJson(name: metadata.stringValue!)
+                    if splitedCode[0] == bookUID {
+                        // QRコードからローカルの音源を取得
+                        getAudioResouce(name: metadata.stringValue!)
+                        
+                        // QRコードからトラック情報を取得
+                        getTrackTitleFromJson(name: metadata.stringValue!)
+                    } else {
+                        print("this app does not support this code")
+                    }
+                    
                     //getDataFromQR(urlString: "section/1/1")
                 }
             }
