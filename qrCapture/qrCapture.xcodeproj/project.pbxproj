@@ -15,6 +15,7 @@
 		3B8EAD661EF7D58900C8BE15 /* abc-10003.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD631EF7D58900C8BE15 /* abc-10003.mp3 */; };
 		3B8EAD671EF7D58900C8BE15 /* abc-10004.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD641EF7D58900C8BE15 /* abc-10004.mp3 */; };
 		3B8EAD681EF7D58900C8BE15 /* abc-10005.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD651EF7D58900C8BE15 /* abc-10005.mp3 */; };
+		3B8EAD6A1EF7E1C300C8BE15 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */; };
 		3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */; };
 		3BB5FD001EE409ED008CA08F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FCFE1EE409ED008CA08F /* Main.storyboard */; };
 		3BB5FD021EE409ED008CA08F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5FD011EE409ED008CA08F /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		3B8EAD631EF7D58900C8BE15 /* abc-10003.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10003.mp3"; sourceTree = "<group>"; };
 		3B8EAD641EF7D58900C8BE15 /* abc-10004.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10004.mp3"; sourceTree = "<group>"; };
 		3B8EAD651EF7D58900C8BE15 /* abc-10005.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10005.mp3"; sourceTree = "<group>"; };
+		3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		3BB5FCF71EE409ED008CA08F /* qrCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qrCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB5FCFA1EE409ED008CA08F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BB5FCFF1EE409ED008CA08F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */,
+				3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB5FD131EE40D2F008CA08F /* Constraint.swift in Sources */,
+				3B8EAD6A1EF7E1C300C8BE15 /* RealmModels.swift in Sources */,
 				3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */,
 				3BB5FD101EE40C43008CA08F /* TabBarViewController.swift in Sources */,
 				3BB5FD161EE40D7C008CA08F /* Params.swift in Sources */,
