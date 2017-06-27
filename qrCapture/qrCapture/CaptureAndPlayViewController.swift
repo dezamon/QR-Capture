@@ -34,7 +34,9 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
 
     var audioPlayer: AVAudioPlayer!
     var currentAudioFileName:String = ""
+    //var currentAudioFileName:String = "abc-10005"
     var currentTrackIndex:Int = 0
+    //var currentTrackIndex:Int = 3
     var firRef:DatabaseReference?
     var isSliderTapping:Bool = false
     var isLooping:Bool = false
@@ -71,7 +73,7 @@ class CaptureAndPlayViewController: UIViewController, AVCaptureMetadataOutputObj
         // 再生、ループなどのボタンを作成
         createControllButtons()
         
-        // AudioPlayerを初期化します
+        // AudioPlayerを初期化
         initAudioPlayer()
         
         //getAudioResouce()
@@ -187,7 +189,7 @@ extension CaptureAndPlayViewController {
         // トラックタイトル用のラベルを作成
         trackTitleLabel.font = UIFont(name: fontHirakakuW6, size: fontSizeL)
         trackTitleLabel.textColor = colorGrayDark2
-        trackTitleLabel.text = "基本の挨拶"
+        trackTitleLabel.text = "基本の挨拶5"
     
         _ = customSizeConstraint.label.defineSize(item: trackTitleLabel, width: titleLabelWidth, height: titleLabelHeight)
         
@@ -199,7 +201,7 @@ extension CaptureAndPlayViewController {
         // サブラベルの作成
         subLabel.font = UIFont(name: fontHirakakuN3, size: fontSizeM)
         subLabel.textColor = colorGrayDark3
-        subLabel.text = "チャプター1 おはようございます"
+        subLabel.text = "チャプター5 おはようございます"
         
         _ = customSizeConstraint.label.defineSize(item: subLabel, width: titleLabelWidth, height: subLabelHeight)
         

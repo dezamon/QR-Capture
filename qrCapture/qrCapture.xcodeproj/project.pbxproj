@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3B2602731EEE91360092AB27 /* abc-10001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602721EEE91360092AB27 /* abc-10001.mp3 */; };
 		3B2602751EEEBF8A0092AB27 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */; };
+		3B6AAA771EFB30A900B8E10A /* LikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6AAA761EFB30A900B8E10A /* LikeTableViewCell.swift */; };
 		3B8EAD5D1EF5A19C00C8BE15 /* customExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */; };
 		3B8EAD5F1EF6BC4C00C8BE15 /* abc-10002.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD5E1EF6BC4C00C8BE15 /* abc-10002.mp3 */; };
 		3B8EAD621EF6C0B100C8BE15 /* track.json in Resources */ = {isa = PBXBuildFile; fileRef = 3B8EAD611EF6C0B100C8BE15 /* track.json */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		3B2602721EEE91360092AB27 /* abc-10001.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10001.mp3"; sourceTree = "<group>"; };
 		3B2602741EEEBF8A0092AB27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B6AAA761EFB30A900B8E10A /* LikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeTableViewCell.swift; sourceTree = "<group>"; };
 		3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customExtensions.swift; sourceTree = "<group>"; };
 		3B8EAD5E1EF6BC4C00C8BE15 /* abc-10002.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "abc-10002.mp3"; sourceTree = "<group>"; };
 		3B8EAD611EF6C0B100C8BE15 /* track.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = track.json; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				3B8EAD5C1EF5A19C00C8BE15 /* customExtensions.swift */,
 				3B8EAD691EF7E1C300C8BE15 /* RealmModels.swift */,
+				3B6AAA761EFB30A900B8E10A /* LikeTableViewCell.swift */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				3BB5FD131EE40D2F008CA08F /* Constraint.swift in Sources */,
 				3B8EAD6A1EF7E1C300C8BE15 /* RealmModels.swift in Sources */,
 				3BB5FCFB1EE409ED008CA08F /* AppDelegate.swift in Sources */,
+				3B6AAA771EFB30A900B8E10A /* LikeTableViewCell.swift in Sources */,
 				3BB5FD101EE40C43008CA08F /* TabBarViewController.swift in Sources */,
 				3BB5FD161EE40D7C008CA08F /* Params.swift in Sources */,
 				3B8EAD5D1EF5A19C00C8BE15 /* customExtensions.swift in Sources */,
